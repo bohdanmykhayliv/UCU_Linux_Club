@@ -1,0 +1,24 @@
+#! /usr/bin/python
+
+import os
+a = os.system('echo $(pacman -Q) > query.txt')
+
+apps= open('query.txt', 'r', encoding= 'utf-8')
+apps_str = apps.read()
+apps.close()
+a = os.system('rm query.txt')
+
+splitted_lst = apps_str.split(' ')
+only_apps = []
+
+for i in range(0, len(splitted_lst), 2):
+    only_apps.append(splitted_lst[i])
+
+apps_cs_ba = []
+for i in only_apps:
+    if 'apps' in i or 'cs' in i or 'ba' in i:
+        apps_cs_ba.append(i)
+
+output = ' -> '.join(apps_cs_ba)
+
+print(output)
